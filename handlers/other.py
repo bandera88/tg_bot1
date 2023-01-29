@@ -9,7 +9,7 @@ def reg_handlers_other(dp : Dispatcher):
 async def ban(message : types.Message):
     if {i.lower().translate(str.maketrans('','', string.punctuation)) for i in message.text.split(' ')}\
         .intersection(set(json.load(open('C:\\Users\\dimam\\tg_bot\\words.json')))) != set():
-        await message.reply('Бан по причині підарас')
+        await message.reply('Бан по причині 1488')
     #await message.answer(message.text)
     #await message.reply(message.text)
     #await bot.send_message(message.from_user.id, message.text)

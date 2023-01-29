@@ -32,5 +32,5 @@ async def command_show(message: types.Message):
     cur = base.cursor()
     cur.execute("SELECT name, mark FROM menu WHERE id = ?", (usr_id, ))
     result = cur.fetchall()
-    arr = [result]
-    await message.reply(f'Ваш айді {usr_id}, \n Ваші оцінки \n {arr}')
+    #arr = [result]
+    await message.reply(f'Ваш айді {usr_id}, \n Ваші оцінки \n {result}')

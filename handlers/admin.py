@@ -85,5 +85,3 @@ def reg_handlers_admin(dp : Dispatcher):
     dp.register_message_handler(load_sub_mark, state=FSMadmin.sub_mark)
     #dp.register_message_handler(cancel_handler, state='*', commands='cancel')
     #dp.register_message_handler(cancel_handler, Text(equals='cancel', ignore_case=True), state='*')
-
-
