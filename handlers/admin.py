@@ -5,11 +5,24 @@ from aiogram import types
 from aiogram.dispatcher.filters import Text
 from data_base import sqlite_db
 from keyboards import admin_kb
+import sqlite3 as sq
 
 class FSMadmin(StatesGroup):
     sub_name = State()
     sub_mark = State()
 
+async def command_show(message: types.Message):
+    global base, cur, usr_id
+    usr_id = message.from_user.id
+    base = sq.connect('base.db')
+    cur = base.cursor()
+    cur.execute("SELECT name, mark FROM menu WHERE id = ?", (usr_id, ))
+    result = cur.fetchall()
+    # if result:
+    #     print(result[0])
+    arr = [result]
+    #str_arr = str(arr)
+    await message.reply(f'Ваш айді {usr_id}, \n Ваші оцінки \n {arr}')
 
 # async def only_for_btn(message: types.Message):
 #     await bot.send_message(message.from_user.id, "Що треба?", reply_markup=admin_kb.kb_admin)
@@ -50,8 +63,8 @@ async def load_sub_mark(message : types.Message, state : FSMContext):
     
     
     #data to tg
-    async with state.proxy() as data:
-        await message.reply(str(data))
+    #async with state.proxy() as data:
+    #    await message.reply(str(data))
     
     #data to sql
     await sqlite_db.sql_add_command(state)
@@ -62,6 +75,7 @@ async def load_sub_mark(message : types.Message, state : FSMContext):
 
 def reg_handlers_admin(dp : Dispatcher):
     #dp.register_message_handler(only_for_btn, commands=['add'], state=None)
+    dp.register_message_handler(command_show, commands=['show'])
     dp.register_message_handler(cm_start, commands=['add'], state=None)
     #dp.register_message_handler(cancel_handler, state='*', commands='cancel')
     #dp.register_message_handler(cancel_handler, Text(equals='cancel', ignore_case=True), state='*')
