@@ -4,7 +4,8 @@ b_help = KeyboardButton('/help')
 b_info = KeyboardButton('/info')
 b_add = KeyboardButton('/add')
 b_show = KeyboardButton('/show')
+b_del = KeyboardButton('/delete')
 
 kb_client = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
 
-kb_client.row(b_help, b_info, b_add, b_show)
+kb_client.row(b_help, b_info, b_add, b_show, b_del)
